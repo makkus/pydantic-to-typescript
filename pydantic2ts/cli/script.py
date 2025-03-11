@@ -254,9 +254,10 @@ def _schema_generation_overrides(
                 revert["extra"] = config.get("extra")
                 config["extra"] = "forbid"
         else:
-            if config.extra != "allow":
-                revert["extra"] = config.extra
-                config.extra = "forbid"  # type: ignore
+            if hasattr(config, 'extra'):
+                if config.extra != "allow":
+                    revert["extra"] = config.extra
+                    config.extra = "forbig" # type: ignore
         yield
     finally:
         for key, value in revert.items():
